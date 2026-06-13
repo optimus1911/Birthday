@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Akshara! 🌸</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="A special, interactive birthday wish website for the best bestie, Akshara! Packed with pandas, teddies, and memories.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Floating Hearts & Sparkles Background -->
+  <div class="floating-bg" id="floating-bg"></div>
+
+  <!-- Audio Element (Happy Birthday Instrumental Loop) -->
+  <audio id="bg-music" src="https://github.com/BaseMax/happy-birth-letter/raw/main/happy-birthday.mp3" loop></audio>
+
+  <!-- ==================== VIEW 1: ENVELOPE / WELCOME ==================== -->
+  <div class="welcome-screen" id="welcome-screen">
+    <div class="envelope-wrapper">
+      <div class="envelope" id="envelope">
+        <div class="flap"></div>
+        <div class="pocket"></div>
+        <div class="letter-preview">
+          <p>For my Bestie</p>
+          <h2>Akshara 🌸</h2>
+        </div>
+        <div class="hearts-burst"></div>
+      </div>
+    </div>
+    <button class="open-btn" id="open-btn">
+      <span class="btn-text">Open Special Delivery 💌</span>
+      <span class="btn-sparkle"></span>
+    </button>
+  </div>
+
+  <!-- ==================== VIEW 2: MAIN DASHBOARD ==================== -->
+  <div class="dashboard-screen hidden" id="dashboard-screen">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="music-control" id="music-toggle" title="Play/Pause Music">
+        <!-- SVG Speaker Icon -->
+        <svg class="speaker-icon playing" viewBox="0 0 24 24" id="speaker-icon">
+          <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.07,19.86 21,16.28 21,12C21,7.72 18.07,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/>
+        </svg>
+        <span class="music-label">Music On</span>
+      </div>
+    </header>
+
+    <!-- Main Title -->
+    <main class="dashboard-content">
+      <div class="hero-section">
+        <h1 class="main-title">Happy Birthday, Akshara! 🎂✨</h1>
+        <p class="subtitle">Celebrating the sweetest best friend in the entire universe! 💖</p>
+        
+        <!-- Friendship Badges -->
+        <div class="badges-container">
+          <span class="badge"><span class="badge-icon">👫</span> Only Best Friends</span>
+          <span class="badge"><span class="badge-icon">🐼</span> Panda Partner</span>
+          <span class="badge"><span class="badge-icon">🧸</span> Teddy Buddy</span>
+          <span class="badge"><span class="badge-icon">🌟</span> Purest Bond</span>
+        </div>
+      </div>
+
+      <!-- Interactive Cards Grid -->
+      <section class="cards-grid">
+        <!-- Card 1: Virtual Letter -->
+        <div class="card" id="card-letter" data-modal="modal-letter">
+          <div class="card-icon">💌</div>
+          <h3 class="card-title">Bestie's Letter</h3>
+          <p class="card-desc">A heartfelt message written just for you. Open with care!</p>
+          <div class="card-arrow">Tap to read →</div>
+        </div>
+
+        <!-- Card 2: Panda & Teddy Playroom -->
+        <div class="card" id="card-playroom" data-modal="modal-playroom">
+          <div class="card-icon">🐼🐾</div>
+          <h3 class="card-title">Panda & Teddy Corner</h3>
+          <p class="card-desc">Send cute hugs and get sweet expressions from your favorite buddies.</p>
+          <div class="card-arrow">Enter Corner →</div>
+        </div>
+
+        <!-- Card 3: Blow the Candles -->
+        <div class="card" id="card-cake" data-modal="modal-cake">
+          <div class="card-icon">🕯️🎂</div>
+          <h3 class="card-title">Make a Wish!</h3>
+          <p class="card-desc">Blow out the virtual candles and unlock your special surprise.</p>
+          <div class="card-arrow">Blow Candle →</div>
+        </div>
+
+        <!-- Card 4: Memory Lane -->
+        <div class="card" id="card-gallery" data-modal="modal-gallery">
+          <div class="card-icon">📸✨</div>
+          <h3 class="card-title">Memory Lane</h3>
+          <p class="card-desc">A gorgeous polaroid collection of your beautiful snapshots.</p>
+          <div class="card-arrow">View Gallery →</div>
+        </div>
+      </section>
+
+      <!-- Footer Message -->
+      <footer class="footer">
+        <p>Created with 💖 by your Best Friend | Happy Birthday Akshara!</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ==================== MODALS / OVERLAYS ==================== -->
+
+  <!-- Modal 1: Letter -->
+  <div class="modal" id="modal-letter">
+    <div class="modal-backdrop"></div>
+    <div class="modal-container letter-modal-container">
+      <button class="close-btn" data-close>&times;</button>
+      <div class="modal-scroll-content">
+        <div class="letter-paper">
+          <div class="letter-header">
+            <span class="letter-date">June 14, 2026 🌸</span>
+            <h2 class="letter-salutation">Dear Akshara,</h2>
+          </div>
+          <div class="letter-body">
+            <p id="typewriter-text"></p>
+            <span class="cursor">|</span>
+          </div>
+          <div class="letter-footer">
+            <p>Always your bestie,</p>
+            <h3>Your Best Friend 👫</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Panda & Teddy Playroom -->
+  <div class="modal" id="modal-playroom">
+    <div class="modal-backdrop"></div>
+    <div class="modal-container playroom-container">
+      <button class="close-btn" data-close>&times;</button>
+      <h2 class="modal-title">Panda & Teddy Playroom 🐼🧸</h2>
+      <p class="modal-subtitle">Tap on Panda or Teddy to see what they have to say to you!</p>
+      
+      <div class="playroom-split">
+        <!-- Panda Side -->
+        <div class="playroom-character" id="char-panda">
+          <div class="char-img-wrapper">
+            <img src="images/cute_panda.png" alt="Cute Panda" class="char-img" id="img-panda">
+            <span class="tap-hint">Tap me!</span>
+          </div>
+          <h3 class="char-name">Pipo the Panda 🐼</h3>
+          <div class="bubble-container" id="panda-bubble">
+            <div class="speech-bubble">Hello Akshara! I am so happy today! 🎂</div>
+          </div>
+        </div>
+
+        <!-- Teddy Side -->
+        <div class="playroom-character" id="char-teddy">
+          <div class="char-img-wrapper">
+            <img src="images/cute_teddy.png" alt="Cute Teddy Bear" class="char-img" id="img-teddy">
+            <span class="tap-hint">Tap me!</span>
+          </div>
+          <h3 class="char-name">Barni the Teddy 🧸</h3>
+          <div class="bubble-container" id="teddy-bubble">
+            <div class="speech-bubble">Happy Birthday! Ready for a big teddy bear squeeze? Hugs!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hug Button -->
+      <div class="hug-button-container">
+        <button class="btn-primary" id="send-hug-btn">Send Group Cuddle 💖</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Candle Blowing Game -->
+  <div class="modal" id="modal-cake">
+    <div class="modal-backdrop"></div>
+    <div class="modal-container cake-container">
+      <button class="close-btn" data-close>&times;</button>
+      <h2 class="modal-title">Blow Out the Candles! 🕯️</h2>
+      <p class="modal-subtitle">Tap or Click on the candles to blow them out and make a wish!</p>
+      
+      <div class="cake-area">
+        <!-- Birthday Cake Graphic -->
+        <div class="cake-graphics">
+          <div class="candle-stand">
+            <!-- Candle 1 -->
+            <div class="candle active-candle" id="candle-1">
+              <div class="flame"></div>
+              <div class="wax"></div>
+            </div>
+            <!-- Candle 2 -->
+            <div class="candle active-candle" id="candle-2">
+              <div class="flame"></div>
+              <div class="wax"></div>
+            </div>
+            <!-- Candle 3 -->
+            <div class="candle active-candle" id="candle-3">
+              <div class="flame"></div>
+              <div class="wax"></div>
+            </div>
+          </div>
+          <div class="cake-top"></div>
+          <div class="cake-middle"></div>
+          <div class="cake-bottom"></div>
+        </div>
+      </div>
+
+      <div class="wish-reveal hidden" id="wish-reveal-box">
+        <div class="wish-message">
+          <h3>✨ Wish Made! ✨</h3>
+          <p>“May your year be filled with cute panda rolls, teddy bear warm hugs, and endless giggles. You deserve the absolute best, Akshara!” 🌸🌈</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Polaroid Gallery -->
+  <div class="modal" id="modal-gallery">
+    <div class="modal-backdrop"></div>
+    <div class="modal-container gallery-container">
+      <button class="close-btn" data-close>&times;</button>
+      <h2 class="modal-title">Memory Lane 📸</h2>
+      <p class="modal-subtitle">Taps to expand and read details of each sweet photo.</p>
+      
+      <div class="polaroid-grid">
+        <!-- Polaroid 1 -->
+        <div class="polaroid" data-photo="1">
+          <div class="polaroid-img-frame">
+            <img src="images/photo1.jpg" alt="Akshara Sunset">
+          </div>
+          <div class="polaroid-caption">Golden Hour Vibe 🌅</div>
+        </div>
+
+        <!-- Polaroid 2 -->
+        <div class="polaroid" data-photo="2">
+          <div class="polaroid-img-frame">
+            <img src="images/photo2.jpg" alt="Akshara with Flowers">
+          </div>
+          <div class="polaroid-caption">Flowers for a Flower 🌸</div>
+        </div>
+
+        <!-- Polaroid 3 -->
+        <div class="polaroid" data-photo="3">
+          <div class="polaroid-img-frame">
+            <img src="images/photo3.jpg" alt="Akshara Peacock Feather">
+          </div>
+          <div class="polaroid-caption">A Divine Touch ✨</div>
+        </div>
+
+        <!-- Polaroid 4 -->
+        <div class="polaroid" data-photo="4">
+          <div class="polaroid-img-frame">
+            <img src="images/photo4.jpg" alt="Akshara Smiling">
+          </div>
+          <div class="polaroid-caption">Pure Happiness 💫</div>
+        </div>
+
+        <!-- Polaroid 5 -->
+        <div class="polaroid" data-photo="5">
+          <div class="polaroid-img-frame">
+            <img src="images/photo5.jpg" alt="Akshara Back Garden">
+          </div>
+          <div class="polaroid-caption">Chasing Dreams 🌷</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox for Expanded Polaroid -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close">&times;</button>
+      <img src="" alt="Expanded View" id="lightbox-img">
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+      <p class="lightbox-subtext" id="lightbox-subtext"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
