@@ -13,6 +13,37 @@
   <link rel="stylesheet" href="style.css">
   <!-- Canvas Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Intelligent Image Path Fallback (Handles root-level uploads, lowercase 'images', and uppercase 'Images') -->
+  <script>
+    window.addEventListener('error', function(e) {
+      if (e.target.tagName === 'IMG') {
+        const img = e.target;
+        if (!img.dataset.retryCount) {
+          img.dataset.retryCount = '1';
+          if (img.src.includes('/images/')) {
+            img.src = img.src.replace('/images/', '/');
+          } else {
+            const parts = img.src.split('/');
+            const filename = parts.pop();
+            parts.push('images');
+            parts.push(filename);
+            img.src = parts.join('/');
+          }
+        } else if (img.dataset.retryCount === '1') {
+          img.dataset.retryCount = '2';
+          if (img.src.includes('/images/')) {
+            img.src = img.src.replace('/images/', '/Images/');
+          } else {
+            const parts = img.src.split('/');
+            const filename = parts.pop();
+            parts.push('Images');
+            parts.push(filename);
+            img.src = parts.join('/');
+          }
+        }
+      }
+    }, true);
+  </script>
 </head>
 <body>
 
